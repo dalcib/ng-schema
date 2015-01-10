@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <script src="../bower_components/angular/angular.min.js"></script>
+        <script src="../build/ng-schema.js"></script>
+        <script src="app.js"></script>
+        <style>
+          .ng-dirty. ng-invalid{ background: red; }
+          .ng-dirty. ng-valid{ background: lightgreen; }
+
+        </style>
+    </head>
+    <body  >
+      <h1>Order</h1>
+      <div ng-controller="OrderCtrl as order">
+       <form model-schema="mySchema:order" name="form.order">
+         <input id="xxx" name="xxx" ng-model="order.xxx" type="text" minlength="2" ng-minlength="2" maxlength="5" ng-maxlength="5" pattern=".{3,4}" ng-pattern="/.{3,4}/" value="wqrrewrwe"><br>
+         modelValue: {{form.order.xxx.$modelValue}}<br>
+         valid: {{form.order.xxx.$valid}}<br>
+         error: {{form.order.xxx.$error}}<br>
+         value: {{order.xxx}}<br>
+         <br>
+         <input id="xx" name="xx" ng-model="order.xx"/><br>
+         modelValue: {{form.order.xx.$modelValue}}<br>
+         valid: {{form.order.xx.$valid}}<br>
+         error: {{form.order.xx.$error}}<br>
+         value: {{order.xx}}<br><br>
+         xx{{form.order.xx}}<br>
+
+         <hr>
+         <input  ng-model="order._id" required maxLength="15"><br>
+
+         <input type="submit">
+         <br>
+
+         CustomerXX<input ng-model="order.customer" >{{order.customer}}<br>
+          Date:<input ng-model="order.date">{{order.date}}<br>
+          level:<input ng-model="order.level" ng-max="20">{{order.level}}<br>
+         <textarea name="comment" ng-model="order.comment"></textarea>{{order.comment}} - {{form.order.comment}}<br>
+          <select ng-model="order.type" id="sel">
+            <option ></option>
+            <option >Normal</option>
+            <option >Special</option>
+         </select><br>
+         <input type="checkbox" ng-model="order.delivered">{{order.delivered}}<br>
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Price</th>
+                <th>Quant</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in order.itens">
+                <td>{{item._id}}</td>
+                <td>{{item.product._id}}</td>
+                <td>{{item.product.name}}</td>
+                <td>{{item.product.price}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quant}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button ng-click>Send</button>
+
+        </form>
+        <br>
+        <br>
+      </div>
+      <div ng-controller="SrderCtrl">
+        <form model-schema="miSchema:srder" name="seste">
+          <input  ng-model="srder.customer" required>{{srder.customer}}<br>
+          <input  ng-model="srder._id" required maxLength="15"><br>
+          <input ng-model="srder.date">{{srder.date}}<br>
+          {{xseste}}<br>
+          {{xsrder}}<br>
+          <input type="submit">
+        </form>
+      </div>
+
+    </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "ng-schema",
+  "version": "0.1.0",
+  "description": "Validation of Angular with Mongoose Schemas",
+  "main": " ",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dalcib/ng-schema.git"
+  },
+  "keywords": [
+    "angular",
+    "mongoose",
+    "schema",
+    "validation"
+  ],
+  "author": "Dalci de Jesus Bagolin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dalcib/ng-schema/issues"
+  },
+  "homepage": "https://github.com/dalcib/ng-schema"
+}

@@ -1,0 +1,97 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'nodeh',
+1 verbose cli   'C:\\Users\\dalci\\Google Drive\\javascript\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   ' karma-failed-reporter' ]
+2 info using npm@2.0.0
+3 info using node@v0.11.13
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ ' karma-failed-reporter', null ]
+6 verbose cache add spec=" karma-failed-reporter" args=[" karma-failed-reporter",null]
+7 verbose parsed spec { raw: 'karma-failed-reporter',
+7 verbose parsed spec   scope: null,
+7 verbose parsed spec   name: 'karma-failed-reporter',
+7 verbose parsed spec   rawSpec: '',
+7 verbose parsed spec   spec: '*',
+7 verbose parsed spec   type: 'range' }
+8 verbose parsed spec { raw: 'karma-failed-reporter',
+8 verbose parsed spec   scope: null,
+8 verbose parsed spec   name: 'karma-failed-reporter',
+8 verbose parsed spec   rawSpec: '',
+8 verbose parsed spec   spec: '*',
+8 verbose parsed spec   type: 'range' }
+9 verbose addNamed [ 'karma-failed-reporter', '*' ]
+10 verbose addNamed [ null, '*' ]
+11 silly lockFile 3f3a412b-karma-failed-reporter karma-failed-reporter@*
+12 verbose lock karma-failed-reporter@* C:\Users\dalci\AppData\Roaming\npm-cache\3f3a412b-karma-failed-reporter.lock
+13 silly addNameRange { name: 'karma-failed-reporter', range: '*', hasData: false }
+14 verbose mapToRegistry name karma-failed-reporter
+15 verbose mapToRegistry uri https://registry.npmjs.org/karma-failed-reporter
+16 verbose request on initialization, where is /karma-failed-reporter
+17 verbose request after pass 1, where is /karma-failed-reporter
+18 verbose request url raw /karma-failed-reporter
+19 verbose request resolving registry [ 'https://registry.npmjs.org/', './karma-failed-reporter' ]
+20 verbose request after pass 2, where is https://registry.npmjs.org/karma-failed-reporter
+21 verbose request no auth needed
+22 info attempt registry request try #1 at 19:08:53
+23 verbose request id 1e4eb5220aa29885
+24 http request GET https://registry.npmjs.org/karma-failed-reporter
+25 http 500 https://registry.npmjs.org/karma-failed-reporter
+26 info retry will retry, error on last attempt: Error: os_process_error {exit_status,1}: karma-failed-reporter
+27 info attempt registry request try #2 at 19:09:04
+28 http request GET https://registry.npmjs.org/karma-failed-reporter
+29 http 500 https://registry.npmjs.org/karma-failed-reporter
+30 info retry will retry, error on last attempt: Error: os_process_error {exit_status,1}: karma-failed-reporter
+31 info attempt registry request try #3 at 19:10:05
+32 http request GET https://registry.npmjs.org/karma-failed-reporter
+33 http 500 https://registry.npmjs.org/karma-failed-reporter
+34 verbose headers { date: 'Sat, 06 Dec 2014 22:09:50 GMT',
+34 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+34 verbose headers   'content-type': 'application/json',
+34 verbose headers   'cache-control': 'max-age=0',
+34 verbose headers   'content-length': '56',
+34 verbose headers   'accept-ranges': 'bytes',
+34 verbose headers   via: '1.1 varnish',
+34 verbose headers   'x-served-by': 'cache-atl6225-ATL',
+34 verbose headers   'x-cache': 'MISS',
+34 verbose headers   'x-cache-hits': '0',
+34 verbose headers   'x-timer': 'S1417903790.280349,VS0,VE318',
+34 verbose headers   connection: 'close' }
+35 silly registry.get cb [ 500,
+35 silly registry.get   { date: 'Sat, 06 Dec 2014 22:09:50 GMT',
+35 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+35 silly registry.get     'content-type': 'application/json',
+35 silly registry.get     'cache-control': 'max-age=0',
+35 silly registry.get     'content-length': '56',
+35 silly registry.get     'accept-ranges': 'bytes',
+35 silly registry.get     via: '1.1 varnish',
+35 silly registry.get     'x-served-by': 'cache-atl6225-ATL',
+35 silly registry.get     'x-cache': 'MISS',
+35 silly registry.get     'x-cache-hits': '0',
+35 silly registry.get     'x-timer': 'S1417903790.280349,VS0,VE318',
+35 silly registry.get     connection: 'close' } ]
+36 silly lockFile 3f3a412b-karma-failed-reporter karma-failed-reporter@*
+37 silly lockFile 3f3a412b-karma-failed-reporter karma-failed-reporter@*
+38 verbose stack Error: os_process_error {exit_status,1}: karma-failed-reporter
+38 verbose stack     at RegClient.<anonymous> (C:\Users\dalci\Google Drive\javascript\node_modules\npm\node_modules\npm-registry-client\lib\request.js:261:14)
+38 verbose stack     at Request._callback (C:\Users\dalci\Google Drive\javascript\node_modules\npm\node_modules\npm-registry-client\lib\request.js:198:65)
+38 verbose stack     at Request.self.callback (C:\Users\dalci\Google Drive\javascript\node_modules\npm\node_modules\request\request.js:236:22)
+38 verbose stack     at Request.EventEmitter.emit (events.js:110:17)
+38 verbose stack     at Request.<anonymous> (C:\Users\dalci\Google Drive\javascript\node_modules\npm\node_modules\request\request.js:1142:14)
+38 verbose stack     at Request.EventEmitter.emit (events.js:129:20)
+38 verbose stack     at IncomingMessage.<anonymous> (C:\Users\dalci\Google Drive\javascript\node_modules\npm\node_modules\request\request.js:1096:12)
+38 verbose stack     at IncomingMessage.EventEmitter.emit (events.js:129:20)
+38 verbose stack     at _stream_readable.js:898:16
+38 verbose stack     at process._tickCallback (node.js:343:11)
+39 verbose statusCode 500
+40 verbose pkgid karma-failed-reporter
+41 verbose cwd C:\Users\dalci\Google Drive\javascript\GitHub\ng-schema
+42 error Windows_NT 6.1.7601
+43 error argv "nodeh" "C:\\Users\\dalci\\Google Drive\\javascript\\node_modules\\npm\\bin\\npm-cli.js" "install" " karma-failed-reporter"
+44 error node v0.11.13
+45 error npm  v2.0.0
+46 error code E500
+47 error os_process_error {exit_status,1}: karma-failed-reporter
+48 error If you need help, you may report this error at:
+48 error     <http://github.com/npm/npm/issues>
+49 verbose exit [ 1, true ]

@@ -1,0 +1,72 @@
+{
+  "globals": {
+    "jasmine": false,
+    "spyOn": false,
+    "it": false,
+    "xit": false,
+    "console": false,
+    "describe": false,
+    "xdescribe": false,
+    "expect": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "waits": false,
+    "waitsFor": false,
+    "runs": false,
+    "angular": false,
+    "module": false,
+    "inject": false,
+    "dump": false
+  },
+
+
+  "es3": false,
+  "node" : true,
+  "browser" : true,
+  "esnext": true,
+  "devel": true,
+
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true, //p
+  "eqeqeq": true,
+  "forin": true,//p
+  "freeze": true,
+  "immed": true,
+  "latedef": "nofunc", //p
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "nonbsp": true,
+  "quotmark": "single",
+  "plusplus": false,
+  "strict": true,
+  "undef": true,
+  "unused": false,   ////gulp
+
+  //not"regexp": false,
+  //not "trailing": true,  //
+  //not "smarttabs": true,
+
+  "maxparams": 5,
+  "maxdepth": 5,
+  "maxstatements": 30,
+  "maxcomplexity": 14,
+  "maxlen": 120,
+  "indent": 2,
+
+  "debug": true,
+  "eqnull": true, //
+  "noyield": true,
+  "sub": true
+  /*
+  "laxbreak": false,   //
+  "boss" : false,
+  "evil": false,
+  "expr": false, //
+  "funcscope": false,
+  "globalstrict ": false, //"strict": true,
+  "loopfunc": false, //
+  */
+}
