@@ -121,8 +121,8 @@ describe('Directive modelSchema', function() {
       var ngModel = angular.element(xx).controller('ngModel');
       expect(xx.hasAttribute('maxlength')).toBe(true);
       expect(xx.getAttribute('maxlength')).toBe('5');
-      //expect(xx.hasAttribute('ng-maxlength')).toBe(true);
-      //expect(xx.getAttribute('ng-maxlength')).toBe('5');
+      expect(xx.hasAttribute('ng-maxlength')).toBe(true);
+      expect(xx.getAttribute('ng-maxlength')).toBe('5');
       changeInputValueTo(xx, 'abcde');
       expect(ngModel.$viewValue).toEqual('abcde');
       expect(ngModel.$modelValue).toBe('abcde');
@@ -133,9 +133,9 @@ describe('Directive modelSchema', function() {
       expect(ngModel.$viewValue).toEqual('abcdef');
       expect(ngModel.$modelValue).toBe('abcdef');
       expect(scope.form.xx.$valid).toBe(false);
-      //expect(scope.form.xx.$error).toEqual({});
+      expect(scope.form.xx.$error).toEqual({});
       //expect(xx).toBeInvalid();
-      //expect(ngModel.$validators.maxlength).toBeDefined();
+      expect(ngModel.$validators.maxlength).toBeDefined();
       //console.log('asdad',ngModel.$validators, JSON.stringify(xx.ngMaxLength));
 
 
@@ -164,17 +164,17 @@ describe('Directive modelSchema', function() {
 
       var ngModel = angular.element(_id).controller('ngModel');
       scope.minVal = 9;
-      //expect(ngModel.$viewValue).toBe(undefined);
+      expect(ngModel.$viewValue).toBe(undefined);
       //changeInputValueTo(_id, 15);
       //browserTrigger(angular.element(_id), 'blur');
 
-      //expect(ngModel.$viewValue).toEqual('15');
-      /*expect(ngModel.$modelValue).toBe('a');
-      expect(_id.value).toBe('a');*/
+      expect(ngModel.$viewValue).toEqual('15');
+      expect(ngModel.$modelValue).toBe('a');
+      expect(_id.value).toBe('a');
       //ngModel.$validate();
-      //expect(scope.form._id.$valid).toBe(true);
-      //expect(scope.form._id.$error).toEqual({});
-      //expect(scope.form._id.$error.max).toBeTruthy();
+      expect(scope.form._id.$valid).toBe(true);
+      expect(scope.form._id.$error).toEqual({});
+      expect(scope.form._id.$error.max).toBeTruthy();
       //expect(angular.element(_id)).toBeValid();
       //console.log(scope.form._id.$error);
       /*console.log(scope.form._id.$viewValue);

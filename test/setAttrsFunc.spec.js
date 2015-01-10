@@ -112,27 +112,27 @@ describe('Set attributes by functions', function() {
     console.log(scope.teste.xxx.$valid);
     console.log(scope.teste.xxx.$invalid);*/
 
-    /*expect(scope.teste.$pristine).toBe(false);
+    expect(scope.teste.$pristine).toBe(false);
     expect(scope.teste.xxx.$pristine).toBe(false);
     expect(scope.teste.$dirty).toBe(true);
-    expect(scope.teste.xxx.$dirty).toBe(true);*/
+    expect(scope.teste.xxx.$dirty).toBe(true);
 
 
-    /*expect(scope.teste.$pristine).toBe(true);
+    expect(scope.teste.$pristine).toBe(true);
     expect(scope.teste.xxx.$pristine).toBe(true);
     expect(scope.teste.$dirty).toBe(false);
-    expect(scope.teste.xxx.$dirty).toBe(false);*/
+    expect(scope.teste.xxx.$dirty).toBe(false);
 
-    //expect(scope.teste.$valid).toBe(true);
+    expect(scope.teste.$valid).toBe(true);
     expect(scope.teste.xxx.$valid).toBe(true);
 
 
 
-    /*expect(ngModel.$viewValue).toEqual('3');
+    expect(ngModel.$viewValue).toEqual('3');
     expect(ngModel.$modelValue).toEqual('3');
     expect(scope.base.xxx).toEqual('3');
     expect(scope.teste.xxx.$viewValue).toEqual('3');
-    expect(scope.teste.xxx.$modelValue).toEqual('3');*/
+    expect(scope.teste.xxx.$modelValue).toEqual('3');
 
 
     expect(xxx.hasAttributes('type')).toBe(true);

@@ -20,76 +20,20 @@ All rules are in one place, in an Angular service.
 
 ```js
 angular.module('app').factory('mySchema', function() {
-return {
-_id: String,
-customer: { type: String, minlength: 5, required, match:/^[a-zA-Z ]*$/},
-date: { type: Date, default: (new Date()).toISOString()},
-level: { type: Number, max: 3, default: 2},
-delivered: {type: Boolean},
-priority: {type: String, enum: ['high', 'medium', 'low']},
-comment: {type: String, maxlength: 200}
-};
-});
-```
-```html
-<form model-schema="mySchema:order">
-ID:       <input ng-model="order._id"><br>
-Customer: <input ng-model="order.customer"><br>
-Date:     <input ng-model="order.date"><br>
-Level:    <input ng-model="order.level"><br>
-Delivered:<input ng-model="order.delivered"><br>
-Priority: <select ng-model="order.priority"><br>
-Comment:  <textarea ng-model="order.comment"></textarea><br>
-<form>
-```
-It is the same as:
-
-```html
-<form model-schema="mySchema:order">
-ID:       <input ng-model="order._id" name="_id"><br>
-Customer: <input ng-model="order.customer" ng-minlength="5" required ng-pattern="^[a-zA-Z ]*$"  name="customer"><br>
-Date:     <input ng-model="order.date" type="date" ng-init="{{date}}"  name="date"><br>
-Level:    <input ng-model="order.level" type="number" max="3" name="level"><br>
-Delivered:<input ng-model="order.delivered" type="checkbox"  name="delivered"><br>
-Priority: <select ng-model="order.priority">
-<options>high</options>
-<options>medium</options>
-<options>low</options>
-</select><br>
-Comment:  <textarea ng-model="order.comment" ng-maxlength="200"></textarea><br>
-<form>
-```
-
-##Documentation
-
-####Types
-- ``String``, ``Number``, ``Boolean``, ``Date``
-or
-- 'text', 'string', number', 'integer', 'date', 'month', 'time', 'week', 'checkbox', 'radio', 'email', 'url', 'search', 'password'
-
-####Constraints
-- ``min``, ``max``, ``maxlength``, ``minlength``, ``required``, ``match`` (or ``pattern``)
-
-####Helpers
-- ``enum``, ``default``
-
-####Html Attributes
-The schema can be used to define elements atributes like:
-``name``, ``title``, ``disable``, ``readonly``, ``step``, ``placeholder``
-
-####Assessors and Modifiers
-- ``get``, ``set``, ``validate``, ``virtual``  (default in Mongoose)
-- ``formatter``, ``parser``  (for use in Angular forms)
-
-```js
-angular.module('app').factory('mySchema', function() {
   return {
-    field: { 
+    _id: String,
+    customer: { type: String, minlength: 5, required, match:/^[a-zA-Z ]*$/},
+    date: { type: Date, default: (new Date()).toISOString()},
+    level: { type: Number, max: 3, default: 2},
+    delivered: {type: Boolean},
+    priority: {type: String, enum: ['high', 'medium', 'low']},
+    comment: {type: String, maxlength: 200},
+    _field: { 
       type: String,
       formatter: function(value) {return value.replace('_', ''); },
       parser: function(value) {return '_'+value;}
     },
-    valid: {
+    validInteger: {
       type: Number,
       validate: function(value) { 
         value = parseInt(modelValue, 10);
@@ -106,10 +50,59 @@ angular.module('app').factory('mySchema', function() {
         this.firstName = words[0] || '';
         this.lastName = words[1] || '';
       }
-    }
-  }
+    }    
+  };
 });
 ```
+```html
+<form model-schema="mySchema" form-data-prefix="order">
+  ID:       <input ng-model="order._id"><br>
+  Customer: <input ng-model="order.customer"><br>
+  Date:     <input ng-model="order.date"><br>
+  Level:    <input ng-model="order.level"><br>
+  Delivered:<input ng-model="order.delivered"><br>
+  Priority: <select ng-model="order.priority"><br>
+  Comment:  <textarea ng-model="order.comment"></textarea><br>
+<form>
+```
+It is the same as:
+
+```html
+<form model-schema="mySchema" form-data-prefix="order">
+  ID:       <input ng-model="order._id" name="_id"><br>
+  Customer: <input ng-model="order.customer" ng-minlength="5" required ng-pattern="^[a-zA-Z ]*$"  name="customer"><br>
+  Date:     <input ng-model="order.date" type="date" ng-init="{{date}}"  name="date"><br>
+  Level:    <input ng-model="order.level" type="number" max="3" name="level"><br>
+  Delivered:<input ng-model="order.delivered" type="checkbox"  name="delivered"><br>
+  Priority: <select ng-model="order.priority">
+    <options>high</options>
+    <options>medium</options>
+    <options>low</options>
+  </select><br>
+  Comment:  <textarea ng-model="order.comment" ng-maxlength="200"></textarea><br>
+<form>
+```
+
+##Documentation
+
+####Types
+- ``String``, ``Number``, ``Boolean``, ``Date``
+or
+- ``'text'``, ``'string'``, ``'number'``, ``'integer'``, ``'date'``,`` 'month'``, ``'time'``, ``'week'``, ``'checkbox'``, ``'radio'``, ``'email'``, ``'url'``, ``'search'``, ``'password'``
+
+####Constraints
+- ``min``, ``max``, ``maxlength``, ``minlength``, ``required``, ``match`` (or ``pattern``)
+
+####Helpers
+- ``enum``, ``default``
+
+####Html Attributes
+The schema can be used to define elements atributes like:
+``name``, ``title``, ``disable``, ``readonly``, ``step``, ``placeholder``
+
+####Assessors and Modifiers
+- ``get``, ``set``, ``validate``, ``virtual``  (default in Mongoose)
+- ``formatter``, ``parser``  (for use in Angular forms)
 
 
 ### Notes
