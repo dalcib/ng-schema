@@ -24,11 +24,12 @@ function modelSchema($injector, $compile, Schema) {
 
   function link(scope, element, attrs) {
 
-    var schemaName = splitAttrSchema(attrs.modelSchema);
-    var valueSchema = $injector.get(schemaName.name);
+    var schemaName = attrs.modelSchema; //splitAttrSchema(attrs.modelSchema);
+    var prefix = attrs.formDataPrefix;
+    var valueSchema = $injector.get(schemaName);
     var preSchema = {};
-    if (schemaName.prefix) {
-      preSchema[schemaName.prefix] = valueSchema;
+    if (prefix) {
+      preSchema[prefix] = valueSchema;
     } else {
       preSchema = valueSchema;
     }
@@ -68,7 +69,7 @@ function modelSchema($injector, $compile, Schema) {
           if (toSetNgModel.indexOf(pathNgModel) > -1) {
             setNgModel(compiledField, pathNgModel, path[pathNgModel],  compiledNgModel, scope);
           }
-          setObject(path, scope, schemaName.prefix, fieldName);
+          setObject(path, scope, prefix, fieldName);
         }
       }
     }
@@ -95,17 +96,6 @@ function compileField($compile, path, field, scope, ngModel) {
     return compiledField;
 }
 
-//function linkField() {}
-
-/*function ajustJSONSchema(pathAttr) {
-  switch (pathAttr) {
-    case 'match': return 'pattern';
-    case 'minimum': return 'min';
-    case 'maximum': return 'max';
-    default: return pathAttr;
-  }
-}*/
-
 function setNgModel(field, pathAttr, pathNgModelValue, ngModel) {
   switch (pathAttr) {
     case 'formatter':
@@ -117,7 +107,7 @@ function setNgModel(field, pathAttr, pathNgModelValue, ngModel) {
     case 'validate':
       processValidate(pathNgModelValue, ngModel);
       break;
-    case 'default':
+    //case 'default':
       /*var defaultValue;
       if (pathNgModelValue === 'true') {pathNgModelValue = true;}
       if (pathNgModelValue === 'false') {pathNgModelValue = false;}
@@ -128,7 +118,7 @@ function setNgModel(field, pathAttr, pathNgModelValue, ngModel) {
       }
       field.value = defaultValue;
       //console.log('nnnnnnn txtarez', field, ngModel.$viewValue, defaultValue, ngModel);*/
-      break;
+      //break;
     case 'trim':
       //process(field, pathAttr, pathNgModelValue, ngModel);
       break;
@@ -174,7 +164,13 @@ function setAttr(field, pathAttr, pathAttrValue, ngModel) {
       break;
     case 'default':
       processDefault(field, pathAttr, pathAttrValue, ngModel);
-        break;
+      break;
+    case 'minimum':  //json-schema
+      field.setAttribute('min', pathAttrValue);
+      break;
+    case 'maximum':  //json-schema
+      field.setAttribute('max', pathAttrValue);
+      break;
     default:
       field.setAttribute(pathAttr, pathAttrValue);
       break;
@@ -304,11 +300,11 @@ function processEnum(field, pathAttr, pathAttrValue, ngModel) {
     var enumValues = pathAttrValue;
     return (enumValues.indexOf(value) > -1);
   };
-  ngModel.validators.enumValidator = enumValidator;
+  ngModel.$validators.enumValidator = enumValidator;
   var tag = getNodeTag(field);
   if (tag === 'select' && field.querySelectorAll('option').length === 0 ) {
     pathAttrValue.forEach(function(option){
-      var opt = document.createElement('');
+      var opt = document.createElement('option');
       opt.textContent = option;
       opt.setAttribute('value', option);
       field.appendChild(opt);
@@ -407,17 +403,6 @@ function getNodeTag(elem) {
   empty: /^\s*$/
 };*/
 
-function splitAttrSchema(schemaName) {   ///tested
-  var prefix, name;
-  var splitedSchema = schemaName.split(':');
-  if (splitedSchema.length > 1) {
-    prefix = splitedSchema[1];
-    name = splitedSchema[0];
-  } else {
-    name = schemaName;
-  }
-  return {name: name, prefix: prefix};
-}
 
 
 

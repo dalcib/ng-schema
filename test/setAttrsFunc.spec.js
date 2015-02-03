@@ -67,21 +67,6 @@ describe('Set attributes by functions', function() {
     xxx = form[0].querySelector('#xxx');
   }));
 
-  /*beforeEach(inject(function($injector, _$sniffer_, $compile) {
-    $sniffer = _$sniffer_;
-    //$browser = _$browser_;
-    $compile = $injector.get('$compile');
-    scope = $injector.get('$rootScope');
-
-    changeInputValueTo = function(elem, value) {
-      elem.value = value;
-      browserTrigger(angular.element(elem), $sniffer.hasEvent('input') ? 'input' : 'change');
-      browserTrigger(angular.element(elem), 'blur');
-    };
-  }));*/
-
-
-
 
   it('should set formatters', function() {
     //changeInputValueTo(field, '_3');
@@ -103,8 +88,7 @@ describe('Set attributes by functions', function() {
     //ngModel.$setModelValue('3');   XXXXXXXXXXXXXXXXXXXX
     //scope.teste.valid.$setViewValue('3', 'blur'); // XXXXXXXXXXXX
     //scope.teste.valid.$setModelValue('3');  XXXXXXX
-    scope.base.xxx = 4;
-    scope.$digest();
+
     /*console.log(scope.base.xxx,  ngModel.$modelValue, ngModel.$viewValue);
     console.log(scope.teste.xxx.$modelValue);
     console.log(scope.teste.xxx.$viewValue);
@@ -112,27 +96,21 @@ describe('Set attributes by functions', function() {
     console.log(scope.teste.xxx.$valid);
     console.log(scope.teste.xxx.$invalid);*/
 
-    expect(scope.teste.$pristine).toBe(false);
-    expect(scope.teste.xxx.$pristine).toBe(false);
-    expect(scope.teste.$dirty).toBe(true);
-    expect(scope.teste.xxx.$dirty).toBe(true);
-
-
     expect(scope.teste.$pristine).toBe(true);
     expect(scope.teste.xxx.$pristine).toBe(true);
     expect(scope.teste.$dirty).toBe(false);
     expect(scope.teste.xxx.$dirty).toBe(false);
 
-    expect(scope.teste.$valid).toBe(true);
+    scope.base.xxx = 3;
+    scope.$digest();
+
     expect(scope.teste.xxx.$valid).toBe(true);
 
-
-
     expect(ngModel.$viewValue).toEqual('3');
-    expect(ngModel.$modelValue).toEqual('3');
-    expect(scope.base.xxx).toEqual('3');
+    expect(ngModel.$modelValue).toEqual(3);
+    expect(scope.base.xxx).toEqual(3);
     expect(scope.teste.xxx.$viewValue).toEqual('3');
-    expect(scope.teste.xxx.$modelValue).toEqual('3');
+    expect(scope.teste.xxx.$modelValue).toEqual(3);
 
 
     expect(xxx.hasAttributes('type')).toBe(true);

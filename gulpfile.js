@@ -1,6 +1,5 @@
 'use strict';
 
-
 var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     jshint = require('gulp-jshint'),
@@ -16,6 +15,8 @@ var gulp = require('gulp'),
 //var pkg = require('./package.json'),
 var prepend = '(function () { \n\n',
     append = '})();';
+
+gutil.log = function() { return this;};
 
 gulp.task('js', function () {
     return gulp.src('src/**/*.js')
@@ -45,7 +46,7 @@ gulp.task('lint', function () {
 
 
 gulp.task('watch', function () {
-    gulp.watch(['src/*.js', 'test/*.js'], ['js','lint','test']);
+    gulp.watch(['src/*.js', 'test/*.js'], ['js','lint'/*,'test'*/]);
 });
 
 /*gulp.task('watch:build', function () {
@@ -61,57 +62,34 @@ var karmaCommonConf = {
   basePath : '.',
   files : [
     'bower_components/angular/angular.js',
-    'bower_components/angular-scenario/browserTrigger.js',
+    //'bower_components/angular-scenario/browserTrigger.js',
     //'bower_components/angular-scenario/matchers.js',
     'bower_components/angular-mocks/angular-mocks.js',
     'src/**/*.js',
     'test/**/*.js'
   ],
-  reporters: ['progress'],//, 'brackets'],
+  reporters: [/*'progress',*/ 'dots'],//, 'brackets'],
   frameworks: ['jasmine'],
   autoWatch: true,
   browsers: [
     //'Chrome',
     'PhantomJS'
   ],
-  colors :  false
+  colors :  true
   //singleRun: false,
 };
 
-function karmaExit(exitCode) {
-  var exec = require('child_process').exec;
-  //gutil.log('XXXXX Karma has exited with ' + exitCode);
-  exec('taskkill /im phantomjs.exe',function() {
-    console.log('phantomjs.exe is killed');
-  });
-  //process.exit(exitCode);
-}
-
 gulp.task('tdd', function (done) {
-  karma.server.start(karmaCommonConf, done); //karmaExit);
-//  karma.server.start({
-//    configFile: __dirname + '/karma.conf.js'
-//  }, done);
+  karma.server.start(karmaCommonConf, done);
 });
 
 gulp.task('test', function (done) {
   karmaCommonConf.singleRun = true;
   karma.runner.run(karmaCommonConf, done);
-//  karma.runner.run({
-//    configFile: __dirname + '/karma.conf.js'
-//  }, done);
 });
 
-gulp.task('stop', function (done) {
-  var exec = require('child_process').exec;
-  //gutil.log('bbb Karma has exited );
-  exec('taskkill /im phantomjs.exe',function() {
-    console.log('phantomjs.exe is killed');
-  });
-  process.exit(1);
-});
 
-//taskkill /f /im notepad.exe
-//taskkill /im notepad.exe
-//exec("taskkill /PID "+pid+(force==true?' /f':''),callback);
-//phantomjs.exe
+
+gulp.task('start', ['tdd', 'watch']);
+
+module.exports = gulp;

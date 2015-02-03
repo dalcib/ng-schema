@@ -44,7 +44,7 @@ describe('Directive modelSchema', function() {
     form = angular.element(
       '<form name="form" model-schema="orderSchema" form-data-prefix="order">'+
         '<input id="xx" name="xx" ng-model="order.xx"><br>'+
-        '<input id="_id" name="_id" ng-model="order._id" required max="{{minVal}}" ng-pattern="/5/"><br>'+
+      '<input id="_id" name="_id" ng-model="order._id" required max="{{order.maxVal}}"  >'+// ng-pattern="/5/"><br>'+
         '<input id="customer" ng-model="order.customer" ngoose-label="class-test" maxLength="20"><br>'+
         '<input id="date" ng-model="order.date"><br>'+
         '<input ng-model="order.level"><br>'+
@@ -54,64 +54,28 @@ describe('Directive modelSchema', function() {
           '<option>Special</option>'+
         '</select><br>'+
         '<input type="checkbox" ng-model="order.delivered"><br>'+
-        '<input id="integer" ng-model="order.integer"><br>'+
+        '<input name="integer" id="integer" ng-model="order.integer"><br>'+
       '</form>'
 
     );
     scope = $rootScope;
-    scope.order = {};
+    scope.order = {maxVal: 20};
     $compile(form)(scope);
     scope.$digest();
   }));
 
-  //////////////////////////////
 
 
- /* function compileInput(inputHtml, mockValidity) {
-    inputElm = angular.element(inputHtml);
-    if (angular.isObject(mockValidity)) {
-      VALIDITY_STATE_PROPERTY = 'ngMockValidity';
-      inputElm.prop(VALIDITY_STATE_PROPERTY, mockValidity);
-      currentSpec.after(function() {
-        VALIDITY_STATE_PROPERTY = 'validity';
-      });
-    }
-    formElm = angular.element('<form name="form"></form>');
-    formElm.append(inputElm);
-    $compile(formElm)(scope);
-    scope.$digest();
-  }
-
-  var attrs;
-  beforeEach(function() { currentSpec = this; });
-  afterEach(function() { currentSpec = null; });
-  beforeEach(module(function($compileProvider) {
-    $compileProvider.directive('attrCapture', function() {
-      return function(scope, element, $attrs) {
-        attrs = $attrs;
-      };
-    });
-  }));
-*/
-
-  beforeEach(inject(function($injector, _$sniffer_, _$browser_) {
+  beforeEach(inject(function( _$sniffer_ ) {
     $sniffer = _$sniffer_;
-    $browser = _$browser_;
-    $compile = $injector.get('$compile');
-    scope = $injector.get('$rootScope');
-
     changeInputValueTo = function(elem, value) {
-      elem.value = value;
+      elem.value = value.toString();
       browserTrigger(angular.element(elem), $sniffer.hasEvent('input') ? 'input' : 'change');
       browserTrigger(angular.element(elem), 'blur');
     };
   }));
 
-  afterEach(function() {
-    //dealoc(formElm);
-  });
 
-  ////////////////////////////
 
   describe('should compile the INPUT acording with schema', function() {
 
@@ -121,23 +85,19 @@ describe('Directive modelSchema', function() {
       var ngModel = angular.element(xx).controller('ngModel');
       expect(xx.hasAttribute('maxlength')).toBe(true);
       expect(xx.getAttribute('maxlength')).toBe('5');
-      expect(xx.hasAttribute('ng-maxlength')).toBe(true);
-      expect(xx.getAttribute('ng-maxlength')).toBe('5');
+      //expect(xx.hasAttribute('ng-maxlength')).toBe(true);
+      //expect(xx.getAttribute('ng-maxlength')).toBe('5');
       changeInputValueTo(xx, 'abcde');
       expect(ngModel.$viewValue).toEqual('abcde');
       expect(ngModel.$modelValue).toBe('abcde');
       expect(scope.form.xx.$valid).toBe(true);
       expect(scope.form.xx.$error).toEqual({});
-      //expect(xx).toBeValid();
       changeInputValueTo(xx, 'abcdef');
       expect(ngModel.$viewValue).toEqual('abcdef');
       expect(ngModel.$modelValue).toBe('abcdef');
       expect(scope.form.xx.$valid).toBe(false);
-      expect(scope.form.xx.$error).toEqual({});
-      //expect(xx).toBeInvalid();
+      expect(scope.form.xx.$error).toEqual({maxlength : true});
       expect(ngModel.$validators.maxlength).toBeDefined();
-      //console.log('asdad',ngModel.$validators, JSON.stringify(xx.ngMaxLength));
-
 
     });
 
@@ -145,15 +105,15 @@ describe('Directive modelSchema', function() {
     it('in _id input', function () {
 
       var _id = form[0].querySelector('#_id');
-      expect(form[0]).toBeDefined();
+      expect(_id).toBeDefined();
       expect(_id.hasAttribute('id')).toBe(true);
       expect(_id.getAttribute('id')).toBe('_id');
       expect(_id.value).toEqual('');
       expect(_id.hasAttribute('type')).toBe(true);
       expect(_id.getAttribute('type')).toBe('number');
       expect(_id.hasAttribute('required')).toBe(true);
-      expect(_id.hasAttribute('max')).toBe(true);
-      //expect(_id.getAttribute('min')).toBe('9');
+      //expect(_id.hasAttribute('max')).toBe(true);
+     // expect(_id.getAttribute('max')).toBe('4');
 
 
       // For a full list of event types: https://developer.mozilla.org/en-US/docs/Web/API/document.createEvent
@@ -163,23 +123,22 @@ describe('Directive modelSchema', function() {
 
 
       var ngModel = angular.element(_id).controller('ngModel');
-      scope.minVal = 9;
+      //scope.order.maxVal = 9;
       expect(ngModel.$viewValue).toBe(undefined);
+      scope.form._id.$setViewValue('15');
+      //scope.$digest();
       //changeInputValueTo(_id, 15);
-      //browserTrigger(angular.element(_id), 'blur');
-
       expect(ngModel.$viewValue).toEqual('15');
-      expect(ngModel.$modelValue).toBe('a');
-      expect(_id.value).toBe('a');
-      //ngModel.$validate();
+      expect(ngModel.$modelValue).toEqual(15);
+      expect(scope.order._id).toBe(15);
+      //console.log(scope.order._id);
       expect(scope.form._id.$valid).toBe(true);
       expect(scope.form._id.$error).toEqual({});
-      expect(scope.form._id.$error.max).toBeTruthy();
-      //expect(angular.element(_id)).toBeValid();
-      //console.log(scope.form._id.$error);
-      /*console.log(scope.form._id.$viewValue);
-      console.log(scope.form._id.$modelValue);*/
+      //expect(scope.form._id.$error.max).toBeTruthy();
 
+      
+      scope.form._id.$setViewValue('6');
+      expect(scope.order._id).toEqual(6);
     });
 
     it('in customer input', function () {
@@ -191,23 +150,6 @@ describe('Directive modelSchema', function() {
       expect(customer.hasAttribute('minLength')).toBe(true);
       expect(customer.getAttribute('minLength')).toBe('3');
 
-      /*
-         element = $compile(template)(scope);
-        spyOn(controllerMock, 'search').andCallThrough();
-        var ths = element.find('th');
-
-        var input = angular.element(ths[0].children[0]);
-        input[0].value = 'blah';
-        input.triggerHandler('input');
-        expect(controllerMock.search).not.toHaveBeenCalled();
-        $timeout.flush();
-        expect(controllerMock.search).toHaveBeenCalledWith('blah', 'name');
-
-
-        scope.searchPredicate = 'lastname';
-        scope.$apply();
-        expect(controllerMock.search).toHaveBeenCalledWith('blah', 'lastname');
-        */
 
     });
 
@@ -219,7 +161,8 @@ describe('Directive modelSchema', function() {
       scope.$digest();
       expect(ngModel.$viewValue).toEqual('5');
 
-
+      scope.form.integer.$setViewValue('6');
+      expect(scope.order.integer).toEqual(6.36);
     });
   });
 });
