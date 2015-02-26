@@ -5,3 +5,5 @@ test
 gulp.jshintrc
 gulpfile.js
 karma.conf.js
+.gitignore
+.npmignore
