@@ -1,7 +1,7 @@
 {
   "name": "ng-schema",
   "version": "0.1.0",
-  "main": "build/ng-schema.js",
+  "main": "build/ng-schema.min.js",
   "ignore": [
     "source",
     "test",
